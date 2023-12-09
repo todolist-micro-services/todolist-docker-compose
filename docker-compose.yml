@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:latest
+    container_name: todolist_db
+    volumes:
+      - "../todolist-database/app/src/main/java/todolist/database/mysql/init.sql:/docker-entrypoint-initdb.d/1.sql"
+    ports:
+      - "3307:3306"
+    networks:
+      - back-net
+  authentication_api:
+    container_name: authentication_api
+    build:
+      context: ../todolist-authentification-api
+    ports:
+      - "8081:8081"
+    depends_on:
+      - db
+
+networks:
+  back-net:
+    driver: bridge
