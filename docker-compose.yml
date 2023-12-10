@@ -4,6 +4,9 @@ services:
   db:
     image: mysql:latest
     container_name: todolist_db
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+      MYSQL_DATABASE: todolistMicroServices
     volumes:
       - "../todolist-database/app/src/main/java/todolist/database/mysql/init.sql:/docker-entrypoint-initdb.d/1.sql"
     ports:
@@ -14,10 +17,20 @@ services:
     container_name: authentication_api
     build:
       context: ../todolist-authentification-api
+      args:
+        - SERVER_PORT=${AUTHENTIFICATION_PORT}
+        - DB_URL=${DB_URL}
+        - DB_USERNAME=${DB_USERNAME}
+        - DB_PASSWORD=${DB_PASSWORD}
+        - SECRET_TOKEN=${SECRET_TOKEN}
+        - EMAIL_SENDER=${EMAIL_SENDER}
+        - EMAIL_PASSWORD=${EMAIL_PASSWORD}
     ports:
       - "8081:8081"
     depends_on:
       - db
+    networks:
+      - back-net
 
 networks:
   back-net:
