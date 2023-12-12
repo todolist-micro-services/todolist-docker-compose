@@ -26,9 +26,25 @@ services:
         - EMAIL_SENDER=${EMAIL_SENDER}
         - EMAIL_PASSWORD=${EMAIL_PASSWORD}
     ports:
-      - "8081:8081"
+      - "${AUTHENTIFICATION_PORT}:${AUTHENTIFICATION_PORT}"
     depends_on:
       - db
+    networks:
+      - back-net
+  user_api:
+    container_name: user_api
+    build:
+      context: ../todolist-user-api
+      args:
+        - USER_API_PORT=${USER_API_PORT}
+        - DB_URL=${DB_URL}
+        - DB_USERNAME=${DB_USERNAME}
+        - DB_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "${USER_API_PORT}:${USER_API_PORT}"
+    depends_on:
+      - db
+      - authentication_api
     networks:
       - back-net
 
