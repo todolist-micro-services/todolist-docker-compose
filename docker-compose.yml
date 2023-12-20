@@ -79,6 +79,38 @@ services:
       - authentication_api
     networks:
       - back-net
+  list_api:
+    container_name: list_api
+    build:
+      context: ../todolist-list-api
+      args:
+        - LIST_API_PORT=${LIST_API_PORT}
+        - DB_URL=${DB_URL}
+        - DB_USERNAME=${DB_USERNAME}
+        - DB_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "${LIST_API_PORT}:${LIST_API_PORT}"
+    depends_on:
+      - db
+      - authentication_api
+    networks:
+      - back-net
+  task_api:
+    container_name: task_api
+    build:
+      context: ../todolist-task-api
+      args:
+        - TASK_API_PORT=${TASK_API_PORT}
+        - DB_URL=${DB_URL}
+        - DB_USERNAME=${DB_USERNAME}
+        - DB_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "${TASK_API_PORT}:${TASK_API_PORT}"
+    depends_on:
+      - db
+      - authentication_api
+    networks:
+      - back-net
 
 networks:
   back-net:
