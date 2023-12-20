@@ -18,7 +18,7 @@ services:
     build:
       context: ../todolist-authentification-api
       args:
-        - SERVER_PORT=${AUTHENTIFICATION_PORT}
+        - SERVER_PORT=${AUTHENTIFICATION_API_PORT}
         - DB_URL=${DB_URL}
         - DB_USERNAME=${DB_USERNAME}
         - DB_PASSWORD=${DB_PASSWORD}
@@ -26,7 +26,7 @@ services:
         - EMAIL_SENDER=${EMAIL_SENDER}
         - EMAIL_PASSWORD=${EMAIL_PASSWORD}
     ports:
-      - "${AUTHENTIFICATION_PORT}:${AUTHENTIFICATION_PORT}"
+      - "${AUTHENTIFICATION_API_PORT}:${AUTHENTIFICATION_API_PORT}"
     depends_on:
       - db
     networks:
@@ -42,6 +42,38 @@ services:
         - DB_PASSWORD=${DB_PASSWORD}
     ports:
       - "${USER_API_PORT}:${USER_API_PORT}"
+    depends_on:
+      - db
+      - authentication_api
+    networks:
+      - back-net
+  project_api:
+    container_name: project_api
+    build:
+      context: ../todolist-project-api
+      args:
+        - PROJECT_API_PORT=${PROJECT_API_PORT}
+        - DB_URL=${DB_URL}
+        - DB_USERNAME=${DB_USERNAME}
+        - DB_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "${PROJECT_API_PORT}:${PROJECT_API_PORT}"
+    depends_on:
+      - db
+      - authentication_api
+    networks:
+      - back-net
+  event_api:
+    container_name: event_api
+    build:
+      context: ../todolist-event-api
+      args:
+        - EVENT_API_PORT=${EVENT_API_PORT}
+        - DB_URL=${DB_URL}
+        - DB_USERNAME=${DB_USERNAME}
+        - DB_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "${EVENT_API_PORT}:${EVENT_API_PORT}"
     depends_on:
       - db
       - authentication_api
