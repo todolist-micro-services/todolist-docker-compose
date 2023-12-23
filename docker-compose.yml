@@ -111,6 +111,21 @@ services:
       - authentication_api
     networks:
       - back-net
+  gateway_api:
+    container_name: gateway_api
+    build:
+      context: ../todolist-gateway-api
+    ports:
+      - "${GATEWAY_API_PORT}:${GATEWAY_API_PORT}"
+    environment:
+      - AUTHENTIFICATION_API=${AUTHENTIFICATION_API}
+      - USER_API=${USER_API}
+      - PROJECT_API=${PROJECT_API}
+      - EVENT_API=${EVENT_API}
+      - LIST_API=${LIST_API}
+      - TASK_API=${TASK_API}
+    networks:
+      - back-net
 
 networks:
   back-net:
