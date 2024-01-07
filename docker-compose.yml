@@ -126,6 +126,17 @@ services:
       - TASK_API=${TASK_API}
     networks:
       - back-net
+  client:
+    container_name: client
+    build:
+      context: ../todolist-client
+    ports:
+      - "${CLIENT_PORT}:${CLIENT_PORT}"
+    environment:
+      - VITE_PORT=${CLIENT_PORT}
+      - VITE_API_URL=${GATEWAY_API}
+    networks:
+      - back-net
 
 networks:
   back-net:
