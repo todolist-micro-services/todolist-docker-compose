@@ -63,22 +63,6 @@ services:
       - authentication_api
     networks:
       - back-net
-  event_api:
-    container_name: event_api
-    build:
-      context: ../todolist-event-api
-      args:
-        - EVENT_API_PORT=${EVENT_API_PORT}
-        - DB_URL=${DB_URL}
-        - DB_USERNAME=${DB_USERNAME}
-        - DB_PASSWORD=${DB_PASSWORD}
-    ports:
-      - "${EVENT_API_PORT}:${EVENT_API_PORT}"
-    depends_on:
-      - db
-      - authentication_api
-    networks:
-      - back-net
   list_api:
     container_name: list_api
     build:
