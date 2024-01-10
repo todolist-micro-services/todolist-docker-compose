@@ -105,7 +105,6 @@ services:
       - AUTHENTIFICATION_API=${AUTHENTIFICATION_API}
       - USER_API=${USER_API}
       - PROJECT_API=${PROJECT_API}
-      - EVENT_API=${EVENT_API}
       - LIST_API=${LIST_API}
       - TASK_API=${TASK_API}
     networks:
