@@ -61,6 +61,7 @@ services:
     depends_on:
       - db
       - authentication_api
+      - user_api
     networks:
       - back-net
   list_api:
@@ -77,6 +78,7 @@ services:
     depends_on:
       - db
       - authentication_api
+      - project_api
     networks:
       - back-net
   task_api:
@@ -93,6 +95,7 @@ services:
     depends_on:
       - db
       - authentication_api
+      - list_api
     networks:
       - back-net
   gateway_api:
