@@ -42,13 +42,13 @@ DB_URL=jdbc:mysql://todolist_db:3306/todolistMicroServices
 DB_USERNAME=root
 DB_PASSWORD=
 SECRET_TOKEN=asdfSFS34wfsdfsdfSDSD32dfsddDDerQSNCK34SOWEK5354fdgdf4
-EMAIL_SENDER=johndoemicroservices@gmail.com
-EMAIL_PASSWORD=abfh aect qrhi iqpt
+EMAIL_SENDER=youremail@gmail.com
+EMAIL_PASSWORD=
 ```
 
 If you use gmail like me, you will probably have an error because of the security, you can follow the steps from this [stackoverflow](https://stackoverflow.com/questions/2965251/javamail-with-gmail-535-5-7-1-username-and-password-not-accepted) to generate an application password
 
-On your Google account, enable 2 factors authentication and create a website password.
+On your Google account, enable 2 factors authentication and create an application password.
 
 ## 3. Run
 
